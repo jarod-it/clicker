@@ -15,7 +15,7 @@ Clone le projet :
 
 git clone [https://github.com/jarod-it/clicker.git]
 
-cd convolution
+cd clicker
 
 # 🧑‍💻 Auteur
 
