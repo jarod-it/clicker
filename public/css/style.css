@@ -1,0 +1,460 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    background: rgb(182, 182, 182);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    user-select: none;
+}
+
+main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 150px;
+
+    .flag {
+        z-index: 1000;
+        position: absolute;
+        top: 0;
+        right: 20px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: rgb(67, 24, 108);
+    }
+
+    .player-overlay {
+        top: 195px;
+        left: 265px;
+        text-align: right;
+    }
+
+    .ennemy-overlay {
+        top: 195px;
+        right: 265px;
+    }
+
+    .role-overlay {
+        position: absolute;
+        width: 123px;
+        font-weight: bold;
+
+        .player-name, .ennemy-name {
+            font-size: 1.1rem;
+        }
+
+        .health-bar {
+            width: 100%;
+
+            img {
+                max-width: 100%;
+                z-index: 100;
+            }
+
+            .bar {
+                position: absolute;
+                top: 25px;
+                z-index: -1;
+                display: block;
+                width: 100px;
+                height: 22px;
+                background: red;
+                border: 2px solid black;
+            }
+
+            .player-bar {
+                margin-left: 19px;
+                border-radius: 10px;
+            }
+
+            .ennemy-bar {
+                top: 24px;
+                margin-top: -20px;
+                margin-right: 20px;
+                margin-left: 19px;
+                border-radius: 10px;
+            }
+        }
+        
+        .player-health {
+            top: 195px;
+            left: 265px;
+            text-align: right;
+        }
+
+        .ennemy-health {
+            top: 195px;
+            right: 265px;
+            transform: rotateY(180deg);
+        }
+
+        .health-qty {
+            color: red;
+            background: white;
+            border-radius: 4px;
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    .game-infos {
+        display: flex;
+        width: 900px;
+        gap: 7px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        overflow: hidden;
+
+        .game-history {
+            box-shadow: inset 0 0 0 2px rgb(40, 40, 40),
+                        inset 0 0 0 4px rgb(123, 123, 123),
+                        inset 0 0 0 5px lightgray;
+
+            .tour-infos {
+                color: rgb(72, 72, 72);
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .player-infos {
+                color: rgb(0, 110, 255);
+            }
+            
+            .ennemy-infos {
+                color: red;
+            }
+
+            .infos {
+                margin: 0;
+                padding: 0;
+                margin-left: 10px;
+            }
+        }
+
+        .infos-container {
+            height: 175px;
+            width: calc(50% - 3.5px);
+            padding-top: 5px;
+            margin-bottom: 7px;
+            background: white;
+        }
+    }
+
+    #canvas-container {
+        display: flex;
+        justify-content: center;
+        gap: 7px;
+    
+        #canvas {
+            background: url('../img/bg-fight.jpg');
+            z-index: -1;
+        }
+    
+        .dashboard {
+            width: 250px;
+            height: 500px;
+            background: rgb(255, 248, 242);
+        }
+    
+        .items-container {
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+
+            .coin-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 20%;
+
+                img {
+                    z-index: 100;
+                    max-width: 15%;
+                    margin-right: -15px;
+                }
+
+                .amount {
+                    display: flex;
+                    justify-content: end;
+                    align-items: center;
+                    font-size: 1.7rem;
+                    width: 70%;
+                    height: 35%;
+                    background: white;
+                    padding: 0.2rem;
+                    padding-right: 0.5rem;
+                    border-radius: 5px;
+                    text-align: right;
+                    box-shadow: inset 0 0 5px 0 black;
+                }
+            }
+
+            .specs-container {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                width: 100%;
+                height: 20%;
+
+                .spec {
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    width: 85%;
+
+                    .title {
+                        display : flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        width: 88%;
+                        font-size: 1.1rem;
+                        margin-left: 10px;
+                        margin-bottom: 5px;
+
+                        .price {
+                            display: flex;
+                            justify-content: end;
+                            align-items: center;
+                            margin: 0;
+                            padding: 0;
+                            width: 35%;
+
+                            img {
+                                max-width: 25%;
+                                margin-left: 5px;
+                            }
+
+                            p {
+                                margin: 0;
+                                padding: 0;
+                            }
+                        }
+                    }
+
+                    .more {
+                        position: absolute;
+                        top: 27px;
+                        right: 5px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 5px;
+                        margin-bottom: 7px;
+                        font-size: 2rem;
+                        font-weight: bold;
+                        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                        background: white;
+                        box-shadow: inset 0 0 2px 0 black;
+                        cursor: pointer;
+
+                        &:hover {
+                            width: 38px;
+                            height: 38px;
+                            top: 25.5px;
+                            right: 3.5px;
+                        }
+
+                        &:active {
+                            width: 35px;
+                            height: 35px;
+                            top: 27px;
+                            right: 5px;
+                            box-shadow: 0 0 5px 0 black;
+                        }
+
+                        img {
+                            max-width: 70%;
+                        }
+                    }
+                    
+                    .amount {
+                        display: flex;
+                        justify-content: end;
+                        align-items: center;
+                        font-size: 1.5rem;
+                        width: 70%;
+                        height: 30%;
+                        background: white;
+                        padding: 0.2rem 0;
+                        padding-right: 0.5rem;
+                        margin-left: -20px;
+                        margin-bottom: 7px;
+                        text-align: right;
+                        box-shadow: inset 0 0 3px 0 black;
+                    }
+                }
+            }
+        }
+    
+        .stats-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            flex-wrap: wrap;
+            text-align: center;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+    
+            .amount {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                z-index: 100;
+                height: fit-content;
+                width: 100%;
+                border-top-right-radius: 10px;
+                box-shadow: 0 10px 15px -5px black;
+    
+                p {
+                    display: flex;
+                    justify-content: start;
+                    flex-wrap: wrap;
+                    margin: 0;
+                    padding: 0;
+                    width: 90%;
+                    font-size: 1.4rem;
+                    margin-top: 5px;
+                    text-align: left;
+
+                    .amount-number {
+                        display: block;
+                        padding: 0.2rem;
+                        padding-left: 0.5rem;
+                        background: white;
+                        width: 94%;
+                        margin-bottom: 10px;
+                        border-radius: 5px;
+                        font-size: 1.7rem;
+                        box-shadow: inset 0 0 5px 0 black;
+                    }
+                }
+            }
+
+            .sword-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-image: url('../img/bg-sword.jpg');
+                background-size: contain;
+                width: 100%;
+                height: 50%;
+                box-shadow: inset 0 0 20px -10px black;
+                cursor: pointer;
+
+                img {
+                    scale: 1.5;
+                }
+
+                &:hover {
+                    box-shadow: inset 0 0 30px 0 rgb(230, 166, 77);
+
+                    img {
+                        scale: 1.7;
+                    }
+                }
+            }
+
+            .sword-stats {
+                z-index: 100;
+                box-shadow: 0 -10px 15px -5px black;
+                width: 100%;
+
+                .sword-title {
+                    width: 100%;
+                    font-size: 1.2rem;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                .sword-title.bad {
+                    background: pink;
+                    color: purple;
+                }
+
+                .sword-title.basic {
+                    background: lightgray;
+                    color: darkslategray;
+                }
+
+                .sword-title.middle {
+                    background: rgb(140, 186, 247);
+                    color: rgb(23, 66, 255);
+                }
+
+                .sword-title.big {
+                    background: rgb(157, 246, 157);
+                    color: green;
+                }
+
+                .sword-title.impressive {
+                    background: rgb(103, 0, 141);
+                    color: white;
+                }
+
+                .sword-title.legendary {
+                    background: rgb(255, 128, 0);
+                    color: white;
+                }
+
+                .sword-title.legendarys {
+                    background: rgb(0, 0, 0);
+                    color: white;
+                }
+
+                .sword-title.legendarysss {
+                    background-image: url('../img/legendarysss.jpg');
+                    color: white;
+                }
+
+                .stats {
+                    text-align: left;
+                    margin-left: 1rem;
+                }
+
+                .positive {
+                    color: green;
+                }
+            }
+        }
+    }
+
+    .game-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        bottom: 0;
+        width: 250px;
+        cursor: pointer;
+        transition-duration: 0.3s;
+
+        img {
+            max-width: 100%;
+        }
+
+        &:hover {
+            width: 280px;
+            transition-duration: 0.3s;
+        }
+
+        &:active {
+            img {
+                width: 270px;
+                transition-duration: 0.3s;
+            }
+        }
+    }
+}
